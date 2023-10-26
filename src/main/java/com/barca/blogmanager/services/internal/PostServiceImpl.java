@@ -20,7 +20,7 @@ public class PostServiceImpl implements PostService {
   @Override
   public void createPost(PostCreationDto postDto) {
 
-    Post post = new Post(null, postDto.title(), postDto.description(), postDto.content());
+    Post post = new Post(null, postDto.title(), postDto.description(), postDto.content(), 0);
     postRepository.save(post);
   }
 
@@ -41,5 +41,10 @@ public class PostServiceImpl implements PostService {
     result.orElseThrow();
 
     postRepository.deleteById(id);
+  }
+
+  @Override
+  public long incrementCommentsSize(String postId) {
+    return postRepository.findAndIncrementCommentsSizeById(postId);
   }
 }

@@ -14,4 +14,6 @@ public interface PostService {
   Page<PostResponseDto> getPosts(Pageable pageable);
 
   void deletePost(String id);
+
+  long incrementCommentsSize(String postId);
 }
