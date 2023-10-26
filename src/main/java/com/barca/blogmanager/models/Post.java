@@ -8,10 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Value
 public class Post {
   // TODO add validation
-
   @Id
   String id;
   String title;
   String description;
   String content;
+  int commentsSize;
 }
