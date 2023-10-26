@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Document
 @Value
@@ -22,7 +23,7 @@ public class Comment {
   @Field("user_id")
   String userId;
   String content;
-  Timestamp timestamp; // TODO implement timestamp
-
+  @Field("created_date")
+  Instant createdDate; // TODO implement timestamp
 
 }

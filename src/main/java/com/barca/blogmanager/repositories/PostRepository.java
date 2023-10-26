@@ -1,6 +1,5 @@
 package com.barca.blogmanager.repositories;
 
-import com.barca.blogmanager.dtos.PostCreationDto;
 import com.barca.blogmanager.dtos.PostResponseDto;
 import com.barca.blogmanager.models.Post;
 import org.springframework.data.domain.Page;

@@ -20,7 +20,7 @@ public class PostServiceImpl implements PostService {
   @Override
   public void createPost(PostCreationDto postDto) {
 
-    Post post = new Post(null, postDto.title(), postDto.description(), postDto.content(), 0);
+    Post post = new Post(null, postDto.title(), postDto.description(), postDto.content(), null, 0);
     postRepository.save(post);
   }
 
@@ -37,10 +37,12 @@ public class PostServiceImpl implements PostService {
   @Override
   public void deletePost(String id) {
 
-    Optional<Post> result = postRepository.findById(id);
-    result.orElseThrow();
+    // TODO implement logic to delete associated comments
 
-    postRepository.deleteById(id);
+    Optional<Post> result = postRepository.findById(id);
+    Post post = result.orElseThrow();
+
+    postRepository.deleteById(post.getId());
   }
 
   @Override
