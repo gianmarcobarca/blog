@@ -5,14 +5,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 
-@Document
+@Document("comments")
 @Value
 public class Comment {
 
-// TODO add validation
+  // TODO add validation
 
   @Id
   String id;

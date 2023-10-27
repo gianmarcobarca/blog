@@ -1,0 +1,27 @@
+package com.barca.blogmanager.dtos;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Value;
+
+@Value
+public class UserCreationDto {
+
+  @NotNull
+  @Size(min = 1, max = 50)
+  private final String firstName;
+
+  @NotNull
+  @Size(min = 1, max = 50)
+  private final String lastName;
+
+  @NotNull
+  @Size(min = 6, max = 50)
+  @Email
+  private final String email;
+
+  @NotNull
+  @Size(min = 8, max = 24)
+  private final String password;
+}

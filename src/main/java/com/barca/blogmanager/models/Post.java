@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.Instant;
 
-@Document
+@Document("posts")
 @Value
 public class Post {
   // TODO add validation
