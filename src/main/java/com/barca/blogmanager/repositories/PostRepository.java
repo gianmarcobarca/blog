@@ -17,4 +17,6 @@ public interface PostRepository extends MongoRepository<Post, String> {
 
   @Update("{'$inc': {'commentsSize': 1}}")
   long findAndIncrementCommentsSizeById(String postId);
+
+  void deleteAllByUserId(String userId);
 }

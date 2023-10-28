@@ -1,5 +1,6 @@
 package com.barca.blogmanager.dtos;
 
-public record PostCreationDto(String title, String description, String content) {
-  // TODO add validation
+import jakarta.validation.constraints.Size;
+
+public record PostCreationDto(@Size(min = 1, max = 60) String title, @Size(min = 1, max = 2000) String content) {
 }

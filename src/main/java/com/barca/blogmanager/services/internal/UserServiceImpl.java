@@ -49,12 +49,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     userRepository.save(copy);
   }
 
-  // @Transactional
+  @Transactional
   @Override
   public void deleteUser(String userId) {
 
-    // TODO implement delete post logic
-
+    postRepository.deleteAllByUserId(userId);
     userRepository.deleteById(userId);
   }
 }

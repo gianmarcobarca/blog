@@ -15,13 +15,18 @@ public class Comment {
 
   @Id
   String id;
+
   @Field("post_id")
   String postId;
-  @Field("user_name")
-  String userName; // TODO think about what happens if user changes name
+
   @Field("user_id")
   String userId;
+
+  @Field("user_name")
+  String userName; // TODO think about what happens if user changes name
+
   String content;
+
   @Field("created_date")
   Instant createdDate; // TODO implement timestamp
 

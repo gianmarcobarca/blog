@@ -41,7 +41,8 @@ public class PostSecurityConfig {
         .securityMatcher("/posts/**")
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/posts").authenticated())
+            .requestMatchers(HttpMethod.POST, "/posts").authenticated()
+            .requestMatchers(HttpMethod.DELETE, "/posts/*").authenticated())
         .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
         .csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
