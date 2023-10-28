@@ -11,11 +11,10 @@ public interface PostService {
 
   Post createPost(String userId, String userName, PostCreationDto postDto);
 
-  PostResponseDto getPost(String id);
+  PostResponseDto getPost(String postId);
 
   Page<PostResponseDto> getPosts(Pageable pageable);
 
   void deletePost(String userId, String postId);
 
-  long incrementCommentsSize(String postId);
 }

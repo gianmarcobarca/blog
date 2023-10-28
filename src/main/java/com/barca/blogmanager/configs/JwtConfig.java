@@ -31,18 +31,23 @@ import lombok.RequiredArgsConstructor;
 @Configuration("securityConfig")
 @EnableConfigurationProperties(RsaKeysProperties.class)
 @RequiredArgsConstructor
-public class PostSecurityConfig {
+public class JwtConfig {
 
   private final RsaKeysProperties keys;
 
   @Bean
-  public SecurityFilterChain taskFilterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain postFilterChain(HttpSecurity http) throws Exception {
     http
-        .securityMatcher("/posts/**")
+        .securityMatcher("/posts/**", "/comments/**")
         .authorizeHttpRequests(auth -> auth
+            // posts
             .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/posts").authenticated()
-            .requestMatchers(HttpMethod.DELETE, "/posts/*").authenticated())
+            .requestMatchers(HttpMethod.DELETE, "/posts/**").authenticated()
+            // comments
+            .requestMatchers(HttpMethod.GET, "/comments/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/comments").authenticated()
+            .requestMatchers(HttpMethod.DELETE, "/comments/**").authenticated())
         .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
         .csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

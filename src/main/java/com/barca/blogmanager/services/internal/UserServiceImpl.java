@@ -1,14 +1,18 @@
 package com.barca.blogmanager.services.internal;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.barca.blogmanager.dtos.PostDeletionDto;
 import com.barca.blogmanager.dtos.UserCreationDto;
 import com.barca.blogmanager.models.User;
+import com.barca.blogmanager.repositories.CommentRepository;
 import com.barca.blogmanager.repositories.PostRepository;
 import com.barca.blogmanager.repositories.UserRepository;
 import com.barca.blogmanager.security.CustomUserDetails;
@@ -24,6 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
   private final UserRepository userRepository;
   private final PostRepository postRepository;
+  private final CommentRepository commentRepository;
   private final PasswordEncoder passwordEncoder;
 
   @Override
@@ -53,6 +58,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   @Override
   public void deleteUser(String userId) {
 
+    // I decided to have an expensive deleteUser operation instead of
+    // embedding Post Ids in the User document
+
+    List<PostDeletionDto> list = postRepository.findAllByUserId(userId);
+
+    List<String> copy = list.stream()
+        .map(PostDeletionDto::id)
+        .collect(Collectors.toList());
+
+    commentRepository.deleteAllByPostId(copy);
     postRepository.deleteAllByUserId(userId);
     userRepository.deleteById(userId);
   }

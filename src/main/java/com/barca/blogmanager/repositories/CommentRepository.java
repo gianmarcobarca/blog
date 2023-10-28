@@ -9,4 +9,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface CommentRepository extends MongoRepository<Comment, String> {
 
   Slice<CommentResponseDto> findAllByPostId(String postId, Pageable pageable);
+
+  void deleteAllByPostId(String postId);
+
+  void deleteAllByPostId(Iterable<String> ids);
 }

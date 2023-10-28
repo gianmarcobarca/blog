@@ -10,7 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration("authSecurityConfig")
-public class AuthSecurityConfig {
+public class HttpBasicConfig {
   @Bean
   public SecurityFilterChain authFilterChain(HttpSecurity http) throws Exception {
     http.securityMatcher("/auth/**")
