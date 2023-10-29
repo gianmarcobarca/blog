@@ -8,8 +8,10 @@ import org.springframework.data.domain.Slice;
 
 public interface CommentService {
 
-  Slice<CommentResponseDto> getAllComments(String productId, Pageable pageable);
+  Slice<CommentResponseDto> getAllPostComments(String productId, Pageable pageable);
 
   void createComment(String userId, String userName, CommentCreationDto commentDto);
+
+  void deleteComment(String userId, String commentId);
 
 }

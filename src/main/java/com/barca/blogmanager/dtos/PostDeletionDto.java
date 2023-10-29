@@ -1,5 +1,5 @@
 package com.barca.blogmanager.dtos;
 
-public record PostDeletionDto(String id) {
+public record PostDeletionDto(String id, String userId) {
 
 }

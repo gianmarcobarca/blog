@@ -21,11 +21,11 @@ public class CommentController {
   private final CommentService commentService;
 
   @GetMapping
-  public Slice<CommentResponseDto> getAllComments(@RequestParam String postId, Pageable pageable) {
+  public Slice<CommentResponseDto> getAllPostComments(@RequestParam String postId, Pageable pageable) {
     // TODO searching for non-active postIDs returns an empty page
     // TODO test performance between Slice and Page
 
-    return commentService.getAllComments(postId, pageable);
+    return commentService.getAllPostComments(postId, pageable);
   }
 
   @PostMapping

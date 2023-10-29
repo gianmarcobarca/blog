@@ -15,12 +15,14 @@ public interface PostRepository extends MongoRepository<Post, String> {
 
   Optional<PostResponseDto> findFirstById(String postId);
 
+  Optional<PostDeletionDto> findTopById(String postId);
+
   Page<PostResponseDto> findAllBy(Pageable pageable);
 
   List<PostDeletionDto> findAllByUserId(String userId);
 
-  @Update("{'$inc': {'commentsSize': 1}}")
-  long findAndIncrementCommentsSizeById(String postId);
+  @Update("{'$inc': {'commentsSize': ?1}}")
+  long findAndIncrementCommentsSizeById(String postId, long increment);
 
   void deleteAllByUserId(String userId);
 }

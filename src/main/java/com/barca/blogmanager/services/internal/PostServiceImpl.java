@@ -1,6 +1,7 @@
 package com.barca.blogmanager.services.internal;
 
 import com.barca.blogmanager.dtos.PostCreationDto;
+import com.barca.blogmanager.dtos.PostDeletionDto;
 import com.barca.blogmanager.dtos.PostResponseDto;
 import com.barca.blogmanager.models.Post;
 import com.barca.blogmanager.repositories.CommentRepository;
@@ -41,15 +42,15 @@ public class PostServiceImpl implements PostService {
   @Override
   public void deletePost(String userId, String postId) {
 
-    Optional<Post> result = postRepository.findById(postId);
-    Post post = result.orElseThrow();
+    Optional<PostDeletionDto> result = postRepository.findTopById(postId);
+    PostDeletionDto post = result.orElseThrow();
 
-    if (!(userId.equals(post.getUserId()))) {
+    if (!(userId.equals(post.userId()))) {
       throw new DataIntegrityViolationException("Invalid user");
     }
 
-    commentRepository.deleteAllByPostId(post.getId());
-    postRepository.deleteById(post.getId());
+    commentRepository.deleteAllByPostId(post.id());
+    postRepository.deleteById(post.id());
   }
 
 }
