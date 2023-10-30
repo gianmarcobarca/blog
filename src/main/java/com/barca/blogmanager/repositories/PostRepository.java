@@ -15,7 +15,7 @@ public interface PostRepository extends MongoRepository<Post, String> {
 
   Optional<PostResponseDto> findFirstById(String postId);
 
-  Optional<PostDeletionDto> findTopById(String postId);
+  Optional<PostDeletionDto> findTopById(String postId); // Hack to avoid MongoTemplate projection
 
   Page<PostResponseDto> findAllBy(Pageable pageable);
 
